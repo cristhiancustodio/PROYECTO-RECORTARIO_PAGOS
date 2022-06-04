@@ -1,0 +1,101 @@
+{% extends "base/base.html" %}
+    {% block titulo %}Resumen mensual{% endblock %}
+    {% block links%}
+    <link rel="stylesheet" href="{{url_for('static',filename = 'css/navbar.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'css/historial.css')}}">
+    {% endblock %}
+
+    
+    {% block contenido %}
+    <div class="container2">
+
+        <!--card de registro de gastos-->
+
+        <div class="card-container">
+            <div class="card-title">
+                <h3>Historial de gastos</h3>    
+                <p>Ultimos 30 dias</p>
+            </div> 
+                {% for row in movimientos %} 
+                <div class="card-record">
+                    <div class="record-title">
+                        <p ><strong>{{row[0]}}</strong></p>
+                        <div class="record-desc">
+                            <p>Banco BCP</p>
+                            <p>{{row[1]}}</p>
+                        </div>
+                    </div>
+                    <div class="record-importe">
+                        <p class="importe-{{row[4]}}">-S/{{row[2]}}</p>
+                        <p style="font-size: 0.9em; margin-left: 15px; color: #737373;">{{row[3]}}</p>
+                    </div>
+
+                </div>
+                {% endfor %}
+                <div class="button">
+                    <a href="{{url_for('ver_mas_gastos')}}">Mostrar mas &#32 <i class="fa-solid fa-circle-chevron-down"></i></a>
+                    <a href="{{url_for('gastos')}}">Nuevo registro &#32 <i class="fa-solid fa-circle-plus"></i></a>
+                </div>
+        </div>
+        
+        <!--card de Proximos pagos-->
+        <div class="card-container">
+            <div class="card-title">
+                <h3>Historial de proximos pagos</h3>
+            </div>  
+                {% for row in proximos_pagos %}
+                <div class="card-record">
+                    <div class="record-title">
+                        <p ><strong>{{ row[0] }}</strong></p>
+                        <div class="record-desc">
+                            <p>{{ row[2] }}</p>
+                        </div>
+                    </div>
+                    <div class="record-importe">
+                        {% if row[4]=="gastos" %}
+                            <p class="importe-gastos">-S/{{ row[1] }}</p>
+                        {% else %}
+                            <p class="importe-ingresos">S/{{ row[1] }}</p>
+                        {% endif%}
+                        <p style="font-size: 0.9em; margin-left: 15px; color: #737373;">{{ row[3] }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="button">
+                    <a href="">Mostrar mas &#32 <i class="fa-solid fa-circle-chevron-down"></i></a>
+                    <a href="{{url_for('pagos')}}">Nuevo registro &#32 <i class="fa-solid fa-circle-plus"></i></a>
+                </div>
+
+        </div>
+        <div class="card-container">
+            <div class="card-title">
+                <h3>Cuentas abiertas</h3>
+            </div>
+            
+            <div class="card-body">
+                <div class="body-head">
+                    <p>Cuenta Bancaria</p>
+                    <p>Saldo disponible</p>
+                </div>
+                {% for cuenta in cuentas %}
+                <div class="body-main">
+                    <div class="body-main_title">
+                        <p>{{cuenta[1]}}</p>
+                        <p>0011-0057-0268416421</p>
+                    </div>
+                    <div class="body-balance">
+                        <p><strong>S/ {{cuenta[2]}}</strong></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            
+        </div>
+        
+    </div>
+
+    {% include "scripts.html"%}
+    {% endblock %}
+</body>
+</html>

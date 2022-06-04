@@ -1,0 +1,47 @@
+{% extends "base/base.html" %}
+    {% block titulo %}Banco{% endblock %}
+    {% block links%}
+    <link rel="stylesheet" href="{{url_for('static',filename = 'css/banco.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'css/navbar.css')}}">
+    {% endblock %}
+
+    {% block contenido%}
+    <div class="contenido">
+        <div class="titulo">
+            <h1>Crea tu billetera virtuaL</h1>
+        </div>
+        <form action="{{url_for('registro_banco')}}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="form-datos">
+                <div class="opcion">
+                    <h4>Banco</h4>
+                    <select name="select_banco" id="" class="form-select">
+                        {% for banco in bancos %}
+                        <option value="{{banco[0]}}">{{banco[1]}}</option>
+                        {% endfor %}
+                    </select>
+
+                </div>
+                <div class="monto">
+                    <h4>Ingresa un monto inicial</h4>
+                    <input class="form-control" type="text" name="txtmonto" maxlength="4" required >
+                </div>
+                <div class="opcion-moneda">
+                    <h4>Tipo de moneda</h4>
+                    <select name="moneda" id="" class="form-select">
+                        <option value="soles">Soles</option>
+                        <option value="dolares">Dolares</option>
+                        <option value="euros">Euros</option>
+                    </select>
+                </div>
+            </div>
+            <div class="button">
+                <input type="submit" value="Enviar">
+            </div>
+            
+        </form>
+    </div>
+    {% include "scripts.html"%}
+    {% endblock %}
+</body>
+</html>

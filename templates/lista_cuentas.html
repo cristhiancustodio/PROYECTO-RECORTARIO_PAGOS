@@ -1,0 +1,17 @@
+<aside>
+    <div class="billetera-titulo">
+        <h4>Lista de cuentas</h4>
+    </div>
+    {% for cuenta in cuentas %}
+    <div class="billetera">
+        <div class="billetera-saldo">
+            <p>{{cuenta[2]}}</p>
+        </div>
+        <div class="billetera-desc">
+            <p>{{cuenta[1]}}</p>
+            <p>0011-0057-0268416421</p>
+            <p>Soles</p>
+        </div>
+    </div>
+    {% endfor %}
+</aside>

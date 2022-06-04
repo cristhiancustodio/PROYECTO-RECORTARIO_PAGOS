@@ -1,0 +1,33 @@
+aside{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 350px;   
+    float: left;
+    
+}
+.billetera-titulo {
+    margin-left: 75px;
+}
+.billetera{
+    display: inline-block;
+    padding-right: 40px;
+    padding-left: 10px;
+    background-color: #fff;
+    box-shadow: 2px 3px 6px #EEEEEE;
+    position: relative;
+    left: 70px;
+    margin: 10px 5px;
+
+}
+.billetera-saldo p{
+    font-size: 2.2em;
+    padding-top: 15px;
+    color: #f7a600;
+}
+.billetera p{
+    line-height: 15px;
+}
+.billetera-desc p{
+    color:#777777 ;
+    line-height: 5px;
+}

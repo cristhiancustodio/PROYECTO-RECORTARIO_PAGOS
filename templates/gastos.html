@@ -1,0 +1,78 @@
+{% extends "base/base.html" %}
+    {% block titulo %}Registro de Gastos{% endblock %}
+    {% block links%}
+    <link rel="stylesheet" href="{{url_for('static',filename = 'css/navbar.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'css/billetera.css')}}">
+    {% endblock %}
+
+
+    {% block contenido %}
+    <!--usamos include solo para traer lo que esta en dicho archivo (personalmente es mejor )-->
+    {% include "lista_cuentas.html" %}
+    
+    <div class="container">
+        <div class="title">
+            <h1>Estructura tus gastos</h1>
+        </div>
+        <form action="/registrar_gastos" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="form-nota col-3">
+                <label for="nota" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nota" maxlength="15" name="txtnombre">
+            </div>
+            <div class="form-nota col-4">
+                <label for="nota" class="form-label">Cuenta </label>
+                <select name="banco" id="" class="form-select" >
+                    <option selected>Selecciona una cuenta</option required>
+                    {% for cuenta in cuentas %}
+                    <option value="{{cuenta[3]}}">{{cuenta[1]}}</option >
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-categoria col-5 ">
+                <label for="categoria" class="form-label">Categoria</label>
+                <select name="categoria" id="" class="form-select">
+                    <option selected>Selecciona una categoria</option>
+                    {% for categoria in categorias %}
+                        <option value="{{categoria[0]}}">{{categoria[1]}} </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="row g-3">
+                <div class="form-importe col-2">
+                    <label for="importe" class="form-label" >Importe</label>
+                    <input type="text" id="importe" class="form-control" maxlength="4" name="txtimporte" required>
+                </div>
+                <div class="form-moneda col-2">
+                    <label for="" class="form-label">Tipo de moneda</label>
+                    <select name="moneda" id="" class="form-select">
+                        <option value="soles">Soles</option>
+                        <option value="dolares">Dolares</option>
+                        <option value="euros">Euros</option>
+                    </select>
+                </div>
+                <div class="form-fecha col-3">
+                    <input hidden type="date" name="fecha" id="fecha" class="form-control" value="{{ fecha }}">
+                </div>
+            </div>
+            
+            <div class="form-opciones">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="operacion" id="inlineRadio1" value="gastos" required>
+                    <label class="form-check-label" for="inlineRadio1">Gastos</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="operacion" id="inlineRadio2" value="ingresos" required>
+                    <label class="form-check-label" for="inlineRadio2">Ingresos</label>
+                </div>
+            </div>
+            <div class="form-sumbit">
+                <button type="submit" class="btn"><i class="fa-solid fa-check"></i></button>
+            </div>
+        </form>
+    </div>
+    {% include "scripts.html"%}
+    {% endblock %}
+<!--</body>
+</html>-->

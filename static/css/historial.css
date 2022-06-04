@@ -1,0 +1,85 @@
+
+.container2{
+    margin: 25px 10% ;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+}
+.card-container{
+    /*height: 450px;*/
+    width: 60% ;
+    margin: 5px 10px;
+    border: 1px solid #E0E0E0;
+    border-radius: 20px;
+
+}
+.card-title{
+    margin: 10px;
+    margin-bottom: 5px;
+}
+.card-record{
+    
+    margin: 10px 20px ;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.record-title{
+    margin: 0 10px ;
+    padding: 10px;
+    line-height: 5px;
+}
+
+.record-importe{
+    margin: 0 10px ;
+    padding: 10px;
+    line-height: 5px; 
+}
+/*posible cambio de color para gastos y pagos*/
+.importe-gastos{
+    color: red;
+}
+.importe-ingresos{
+    color: green;
+}
+.record-desc{
+    font-size: 0.8em;
+    margin-left: 15px;
+    color: #737373;
+}
+.button {
+    margin: 15px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.button a {
+    padding: 14px;
+    border-radius: 15px;
+    text-decoration: none;
+}
+/*para historial de cuentas bancarias */
+.card-body{
+    margin:5px 20px;
+}
+.body-head{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.body-head p {
+    border-bottom: 1px solid #737373;
+}
+
+.body-main{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #E5E5E5;
+    margin-bottom: 20px;
+}
+.body-main_title{
+    line-height: 5px;
+}
+

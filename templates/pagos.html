@@ -1,0 +1,104 @@
+{% extends "base/base.html" %}
+{% block titulo %}Programa pagos{% endblock %}
+    {% block links%}
+    <link rel="stylesheet" href="{{url_for('static',filename = 'css/navbar.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'css/billetera.css')}}">
+    {% endblock %}
+    
+    {% block contenido %}
+    <!--usamos include solo para traer lo que esta en dicho archivo (personalmente es mejor )-->
+    {% include "lista_cuentas.html" %}
+    <div class="container">
+       <div class="container-title">
+           <h1>Programa tu proximo pago</h1>
+           
+        </div>
+        <div class="container-form">
+            <form action="/registrar_pagos" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="form-nota col-3">
+                    <label for="nota" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre_operacion" maxlength="15" name="txtnombre">
+                </div>
+                
+                <div class="form-categoria col-5 ">
+                    <label for="categoria" class="form-label">Categoria</label>
+                    <select name="categoria" id="categoria" class="form-select">
+                        <option selected>Selecciona una categoria</option>
+                        {% for categoria in categorias %}
+                            <option value="{{categoria[0]}}">{{categoria[1]}} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="row g-3">
+                    <div class="form-importe col-2">
+                        <label for="importe" class="form-label">Importe</label>
+                        <input type="text" id="importe" class="form-control" maxlength="4" name="txtimporte" required>
+                    </div>
+                    
+                    <div class="form-moneda col-2">
+                        <label for="tipo_moneda" class="form-label">Tipo de moneda</label>
+                        <select name="moneda" id="tipo_moneda" class="form-select">
+                            <option value="soles">Soles</option>
+                            <option value="dolares">Dolares</option>
+                            <option value="euros">Euros </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="form-frecuencia col-3">
+                        <label for="frecuencia-select" class="form-label">Frecuencia</label>
+                        <select name="frecuencia" id="frecuencia-select" class="form-select">
+                            <option value="F-1" onclick="desactivarInput()">Una vez</option>
+                            <option value="F-2" onclick="activarInput()">Pago recurrente</option>
+                        </select>
+                    </div>
+                    <div class="form-fecha col-3">
+                        <label for="select_periodo" class="form-label">Periodo</label>
+                        <select name="periodo" id="select_periodo" class="form-select" disabled>
+                            {% for periodo in periodos %}
+                            <option value="{{periodo[0]}}">{{periodo[0]}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="form-notificacion col-3">
+                        <label for="notificacion-select" class="form-label">Notificacion</label>
+                        <select name="notificacion" id="notificacion-select" class="form-select">
+                            {% for notificacion in notificaciones %}
+                            <option value="{{notificacion[0]}}">{{notificacion[0]}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-fecha col-3">
+                    <label for="fecha" class="form-label">Fecha de inicio</label>
+                    <input type="date" name="fecha" id="fecha" class="form-control" value="{{fecha}}">
+                </div>
+                
+                <label for="floatingTextarea2" class="form-label">Descripcion</label>
+
+                <div class="form-floating col-3">
+                    <textarea class="form-control" name="txtarea"  placeholder="Leave a comment here" id="floatingTextarea2" style="height: 70px ; width:250px"></textarea>
+                </div>
+                <div class="form-opciones">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="operacion" id="inlineRadio1" value="gastos" required>
+                        <label class="form-check-label" for="inlineRadio1">Gastos</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="operacion" id="inlineRadio2" value="ingresos" required>
+                        <label class="form-check-label" for="inlineRadio2">Ingresos</label>
+                    </div>
+                </div>
+                <div class="form-submit mb-3">
+                    <button type="submit" class="btn"><i class="fa-solid fa-check"></i></button>
+                </div>
+            </form>
+            
+        </div>
+   </div>
+   {% include "scripts.html"%}
+   {% endblock %}
+</body>
+</html>
