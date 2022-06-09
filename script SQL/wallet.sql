@@ -12,14 +12,14 @@ insert into BANCOS(banco) values("BBVA Continental"),("BCP"),("Interbank"),("Sco
 
 create table FRECUENCIAS(
 	frecuencia varchar(50) primary key not null,
-    nomina varchar(45) not null
+        nomina varchar(45) not null
 );
 
 insert into FRECUENCIAS values("F-1","Una vez"),("F-2","Pago recurrente");
 
 create table PERIODOS(
 	periodo varchar(50) primary key not null,
-    dias int not null
+        dias int not null
 );
 
 insert into PERIODOS values("Diario",1),("Semanal",7),("Quincenal",15),("Mensual",30),("Semestral",60);
@@ -82,7 +82,7 @@ create table PAGOS(
     foreign key(idUsuario) references USUARIOS(idUsuario) on delete cascade on update cascade,
     foreign key(idCategoria) references CATEGORIAS(idCategoria) on delete cascade on update cascade ,
     foreign key(frecuencia) references FRECUENCIAS(frecuencia)on delete cascade on update cascade,
-    foreign key(periodo) references PERIODOS(periodo)on delete cascade on update cascade,
+    -- foreign key(periodo) references PERIODOS(periodo)on delete cascade on update cascade,
     foreign key(notificacion) references NOTIFICACIONES(notificacion)on delete cascade on update cascade
 );
 
@@ -142,7 +142,7 @@ create table ALERTAS (
 create procedure usp_Login(
 in _usuario varchar(25))
 select * from usuarios where usuario = _usuario;
-call usp_Login('Custox06');
+
 
 create procedure usp_Login_by_id(
 in id_usuario int)
@@ -168,7 +168,7 @@ select bancos.codBanco, bancos.banco,cuentas.monto,cuentas.idCuenta from bancos
 inner join cuentas on bancos.codBanco = cuentas.codBanco
 where idUsuario = _idUsuario;
 
-call verCuentasAbiertas(2);
+
 create procedure insertarGastos(
 in _nombre varchar(45),
 in _importe DECIMAL(7,2),
